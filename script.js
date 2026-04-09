@@ -1,22 +1,26 @@
-//your JS code here. If required.
-
 const sounds = ['applause', 'boo', 'gasp', 'tada', 'victory', 'wrong'];
 
 sounds.forEach(sound => {
     const btn = document.createElement('button');
     btn.classList.add('btn');
-
     btn.innerText = sound;
 
     btn.addEventListener('click', () => {
-        stopSongs(); // Stop any currently playing audio
-        document.getElementById(sound).play();
+        stopSongs();
+        const audio = document.getElementById(sound);
+        
+        // Wrap play in a promise check to prevent unhandled rejection errors
+        if (audio) {
+            audio.play().catch(e => {
+                console.log("Audio play failed, likely missing file:", e.message);
+            });
+        }
     });
 
     document.getElementById('buttons').appendChild(btn);
 });
 
-// Create the Stop Button separately to give it the 'stop' class
+// The stop button
 const stopBtn = document.createElement('button');
 stopBtn.classList.add('btn', 'stop');
 stopBtn.innerText = 'stop';
@@ -27,11 +31,12 @@ stopBtn.addEventListener('click', () => {
 
 document.getElementById('buttons').appendChild(stopBtn);
 
-// Function to pause all audio and reset their time to 0
 function stopSongs() {
     sounds.forEach(sound => {
         const song = document.getElementById(sound);
-        song.pause();
-        song.currentTime = 0;
+        if (song) {
+            song.pause();
+            song.currentTime = 0;
+        }
     });
 }

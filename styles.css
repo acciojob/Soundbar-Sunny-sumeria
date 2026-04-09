@@ -1,22 +1,18 @@
-/*  your css code here. If applicable */
-
 body {
-    background-color: rgb(161, 100, 223); /* Vibrant purple background */
-    font-family: Arial, sans-serif;
+    background-color: rgb(161, 100, 223);
+    font-family: sans-serif;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column; /* Stack vertically if needed */
     align-items: center;
     justify-content: center;
-    text-align: center;
-    height: 100vh;
-	width: 100vw;
+    min-height: 100vh; /* Changed from height to min-height */
     margin: 0;
-    overflow: hidden;
 }
 
 #buttons {
     display: flex;
-    gap: 15px;
+    flex-wrap: wrap; /* Allow buttons to wrap to next line if screen is small */
+    justify-content: center;
 }
 
 .btn {
@@ -24,16 +20,13 @@ body {
     border-radius: 5px;
     border: none;
     color: #fff;
-    margin: 1rem;
+    margin: 10px;
     padding: 1.5rem 3rem;
     font-size: 1.2rem;
     cursor: pointer;
-}
-
-.btn:hover {
-    opacity: 0.9;
+    display: inline-block; /* Ensure it has layout */
 }
 
 .stop {
-    background-color: rgb(105, 48, 158); /* Darker purple for stop */
-	}
+    background-color: rgba(0, 0, 0, 0.2);
+}
